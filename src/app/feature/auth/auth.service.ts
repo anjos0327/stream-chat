@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Auth, authState } from '@angular/fire/auth';
+import { Auth, authState, updateProfile } from '@angular/fire/auth';
 import { createUserWithEmailAndPassword } from '@firebase/auth';
-import { BehaviorSubject, from } from 'rxjs';
+import { BehaviorSubject, from, switchMap } from 'rxjs';
 import { SignupCredential } from './auth.model';
 
 @Injectable({
@@ -20,7 +20,8 @@ export class AuthService {
   }
 
   signUp({ email, displayName, password }: SignupCredential) {
-    from(createUserWithEmailAndPassword(this.auth, email,  password));
-    
+    return from(createUserWithEmailAndPassword(this.auth, email,  password)).pipe(
+      switchMap(( { user }) => updateProfile(user, { displayName }))
+    );
   }
 }
