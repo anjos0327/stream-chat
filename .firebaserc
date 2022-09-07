@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "streamchat-8bfb3": {
+      "hosting": {
+        "new-chat-test": [
+          "streamchat-8bfb3"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "streamchat-8bfb3"
+  }
+}
